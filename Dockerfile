@@ -1,18 +1,19 @@
 FROM phusion/baseimage
 
 # Getting ready
-RUN apt update
+RUN apt-get update
 # UHD
-RUN apt install -y libuhd-dev libuhd003 uhd-host
+RUN apt-get install -y libuhd-dev libuhd003 uhd-host
 # GNU Radio and SDR support
-RUN apt install -y gnuradio gnuradio-dev gr-osmosdr libhackrf-dev libuhd-dev
-RUN apt install -y git cmake build-essential libboost-all-dev libusb-1.0-0.dev libssl-dev libcurl4-openssl-dev
-RUN apt install -y ca-certificates expat libgomp1 fdkaac sox
+RUN apt-get install -y gnuradio gnuradio-dev gr-osmosdr libhackrf-dev libuhd-dev
+RUN apt-get install -y git cmake build-essential libboost-all-dev libusb-1.0-0.dev libssl-dev libcurl4-openssl-dev
+RUN apt-get install -y ca-certificates expat libgomp1 fdkaac sox
 
-# install necessary locales
-RUN apt install -y locales \
-    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-    && locale-gen
+# Trying to make gtk apps look okay over X
+RUN apt-get install -y light-themes ttf-ubuntu-font-family
+RUN echo "gtk-icon-theme-name = \"ubuntu-mono-dark\"" > ~/.gtkrc-2.0 
+RUN echo "gtk-theme-name = \"Ambiance\"" >> ~/.gtkrc-2.0 
+RUN echo "gtk-font-name = \"Ubuntu Regular 11\"" >> ~/.gtkrc-2.0
 
 RUN apt-get autoremove -y && \
     apt-get clean -y && \
