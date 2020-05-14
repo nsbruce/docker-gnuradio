@@ -1,7 +1,6 @@
 FROM phusion/baseimage
 
 # Getting ready
-RUN add-apt-repository ppa:gnuradio/gnuradio-releases
 RUN apt-get update
 # UHD
 RUN apt-get install -y libuhd-dev libuhd003 uhd-host
