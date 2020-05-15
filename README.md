@@ -1,19 +1,27 @@
-Build container with 
+# README
 
-GNU Radio on phusion (Ubuntu 18.04) with a bunch of uhd/ettus/other SDR interfaces and theming so it feels like Ubuntu over XQuartz/X11.
+GNU Radio on Ubuntu LTS Minimal with a bunch of uhd/ettus/other SDR interfaces.
 
-```
-docker build . -t gnuradio:basic
-```
+## Tags
 
-Running through macOS X_Display
+### Latest
 
-```
-IMAGE=gnuradio:basic
+Whatever served from the gnuradio-releases ppa on the latest Ubuntu LTS Minimal.
+
+### 3.7
+
+Whatever is served from the gnuradio-releases-3.7 ppa on the Ubuntu 18.04 Minimal.
+
+- Includes some theming so that it doesn't appear like trash on XQuartz
+
+## Running through macOS X_Display
+
+```bash
+IMAGE=nsbruce/gnuradio:tag
 exec docker run --rm  -it -e XAUTHORITY=~/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=host.docker.internal:0 -v "$PWD":/data -w /data --net host -h docker-gnuradio "$IMAGE"
 ```
 
 This was pieced together from the following areas as well as my own bits:
 
-- https://github.com/cjam/gnuradio-docker
-- https://github.com/robotastic/docker-gnuradio
+- [cjam/gnuradio-docker](https://github.com/cjam/gnuradio-docker)
+- [robotastic/docker-gnuradio](https://github.com/robotastic/docker-gnuradio)
